@@ -77,13 +77,19 @@ with open('items.json', 'r') as f:
 
     word = vectorizer.get_feature_names()  # 获取词袋模型中的所有词语
     weight = tfidf.toarray()  # 将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重
-    #print vectorizer.decode()
+
+
 
     kmeans_model = KMeans(n_clusters=5,random_state=2).fit(tfidf)
     labels = kmeans_model.labels_
     print labels
     print metrics.silhouette_score(tfidf, labels, metric='euclidean')
-
+    print'list_number label  '
+    for i in range(0,4):
+        print "\n簇:"+str(i)
+        for j in range(0,len(labels)-1):
+            if i==labels[j]:
+                print word[j],
 
 
 
